@@ -12,7 +12,7 @@
 ```
 ]]
 
-local Version = "1.1.0";
+local Version = "1.1.0A";
 
 local Settings = {
     File = {
@@ -146,7 +146,7 @@ game:GetService("Players").PlayerAdded:Connect(function(player)
 
                 -- Log the message
                 LogChat(Format(Settings.Formatting.Whisper, {
-                    time = Time;
+                    time = os.date("%H:%M:%S");
                     name = Name;
                     displayname = DisplayName;
                     userid = UserId;
@@ -159,7 +159,7 @@ game:GetService("Players").PlayerAdded:Connect(function(player)
         else
             -- Log the message
             LogChat(Format(Settings.Formatting.Chat, {
-                time = Time;
+                time = os.date("%H:%M:%S");
                 name = Name;
                 displayname = DisplayName;
                 userid = UserId;
@@ -171,7 +171,7 @@ game:GetService("Players").PlayerAdded:Connect(function(player)
     -- Log the join if enabled
     if Settings.Logging.LogJoins then
         LogChat(Format(Settings.Formatting.LogJoinLeave, {
-            time = Time;
+            time = os.date("%H:%M:%S");
             name = Name;
             displayname = DisplayName;
             userid = UserId;
@@ -199,7 +199,7 @@ for _,player in pairs(game:GetService("Players"):GetPlayers()) do
 
                 -- Log the message
                 LogChat(Format(Settings.Formatting.Whisper, {
-                    time = Time;
+                    time = os.date("%H:%M:%S");
                     name = Name;
                     displayname = DisplayName;
                     userid = UserId;
@@ -212,7 +212,7 @@ for _,player in pairs(game:GetService("Players"):GetPlayers()) do
         else
             -- Log the message
             LogChat(Format(Settings.Formatting.Chat, {
-                time = Time;
+                time = os.date("%H:%M:%S");
                 name = Name;
                 displayname = DisplayName;
                 userid = UserId;
@@ -230,7 +230,7 @@ game:GetService("Players").PlayerRemoving:Connect(function(player)
     -- Log the leave if enabled
     if Settings.Logging.LogLeaves then
         LogChat(Format(Settings.Formatting.LogJoinLeave, {
-            time = Time;
+            time = os.date("%H:%M:%S");
             name = player.Name;
             displayname = player.DisplayName;
             userid = player.UserId;
