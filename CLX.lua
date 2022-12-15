@@ -254,7 +254,7 @@ local function ChangeSetting(settingtochange, newvalue)
     -- Check if the category exists
     if Settings[category] then
         -- Check if the setting exists
-        if Settings[category][setting] then
+        if type(Settings[category][setting]) ~= "nil" then
             -- Change the setting
             Settings[category][setting] = newvalue;
         else
