@@ -12,7 +12,7 @@
 ```
 ]]
 
-local Version = "1.1.0A";
+local Version = "1.1.0B";
 
 local Settings = {
     File = {
@@ -77,7 +77,7 @@ local function LogChat(Line) -- @message: The message to log (string)
         writefile(Path, str..Settings.FileGeneration.EndOfFile);
 
         -- Create a new file
-        local Path = "CLX/"..game.PlaceId.."/"..Settings.File.NamePrefix..os.date("%d-%m-%Y-%H-%M-%S")..Settings.File.NameSuffix..Settings.File.NameExtension;
+        Path = "CLX/"..game.PlaceId.."/"..Settings.File.NamePrefix..os.date("%d-%m-%Y-%H-%M-%S")..Settings.File.NameSuffix..Settings.File.NameExtension;
         game:GetService("StarterGui"):SetCore("ChatMakeSystemMessage", {
             Text = "[CLX] Previous file reached character limit, creating new file\n"..Path;
             Color = Color3.fromRGB(255, 127, 0);
@@ -244,4 +244,34 @@ game:GetService("StarterGui"):SetCore("ChatMakeSystemMessage", {
     Color = Color3.fromRGB(255, 255, 0);
 });
 
-return Settings -- Return the settings table so the user can change the settings on runtime
+local function ChangeSetting(settingtochange, newvalue)
+    -- Search all the settings to match the setting to change
+    -- Split the setting into 2 with '.' as the delimiter
+    local set = settingtochange:split(".");
+    local category = set[1];
+    local setting = set[2];
+
+    -- Check if the category exists
+    if Settings[category] then
+        -- Check if the setting exists
+        if Settings[category][setting] then
+            -- Change the setting
+            Settings[category][setting] = newvalue;
+        else
+            -- Notify the user that the setting doesn't exist
+            game:GetService("StarterGui"):SetCore("ChatMakeSystemMessage", {
+                Text = "[CLX] Setting "..settingtochange.." doesn't exist!";
+                Color = Color3.fromRGB(255, 0, 0);
+            });
+        end;
+    else
+        game:GetService("StarterGui"):SetCore("ChatMakeSystemMessage", {
+            Text = "[CLX] Category "..Category[1].." doesn't exist!";
+            Color = Color3.fromRGB(255, 0, 0);
+        });
+    end;
+
+    return ChangeSetting; -- Return the function so it can be used like ChangeSetting("Category.Setting", true)("Category.Setting", false);
+end
+
+return ChangeSetting;
