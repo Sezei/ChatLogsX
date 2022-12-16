@@ -12,7 +12,7 @@
 ```
 ]]
 
-local Version = "1.1.2";
+local Version = "1.1.3";
 
 local Settings = {
     File = {
@@ -63,6 +63,7 @@ function Format(Original,ReplacementData) -- Taken from Redefine:A5's Placeholde
 end
 
 local Path = "CLX/"..game.PlaceId.."/"..Settings.File.NamePrefix..os.date("%d-%m-%Y-%H-%M-%S")..Settings.File.NameSuffix..Settings.File.NameExtension;
+local PlayerIngame = true;
 
 local function LogChat(Line) -- @message: The message to log (string)
     local Time = os.date("%H:%M:%S");
@@ -227,8 +228,13 @@ end;
 game:GetService("Players").PlayerRemoving:Connect(function(player)
     boundplayers[player.UserId] = nil;
 
+    -- Check if the local player is leaving
+    if player.UserId == game:GetService("Players").LocalPlayer.UserId then
+        PlayerIngame = false;
+    end;
+
     -- Log the leave if enabled
-    if Settings.Logging.LogJoinLeave then
+    if Settings.Logging.LogJoinLeave and PlayerIngame then
         LogChat(Format(Settings.Formatting.Leave, {
             time = os.date("%H:%M:%S");
             name = player.Name;
