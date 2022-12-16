@@ -170,7 +170,7 @@ game:GetService("Players").PlayerAdded:Connect(function(player)
 
     -- Log the join if enabled
     if Settings.Logging.LogJoinLeave then
-        LogChat(Format(Settings.Formatting.LogJoinLeave, {
+        LogChat(Format(Settings.Formatting.Join, {
             time = os.date("%H:%M:%S");
             name = Name;
             displayname = DisplayName;
@@ -229,7 +229,7 @@ game:GetService("Players").PlayerRemoving:Connect(function(player)
 
     -- Log the leave if enabled
     if Settings.Logging.LogJoinLeave then
-        LogChat(Format(Settings.Formatting.LogJoinLeave, {
+        LogChat(Format(Settings.Formatting.Leave, {
             time = os.date("%H:%M:%S");
             name = player.Name;
             displayname = player.DisplayName;
