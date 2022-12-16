@@ -12,7 +12,7 @@
 ```
 ]]
 
-local Version = "1.1.0B";
+local Version = "1.1.1";
 
 local Settings = {
     File = {
@@ -169,7 +169,7 @@ game:GetService("Players").PlayerAdded:Connect(function(player)
     end);
 
     -- Log the join if enabled
-    if Settings.Logging.LogJoins then
+    if Settings.Logging.LogJoinLeave then
         LogChat(Format(Settings.Formatting.LogJoinLeave, {
             time = os.date("%H:%M:%S");
             name = Name;
@@ -228,7 +228,7 @@ game:GetService("Players").PlayerRemoving:Connect(function(player)
     boundplayers[player.UserId] = nil;
 
     -- Log the leave if enabled
-    if Settings.Logging.LogLeaves then
+    if Settings.Logging.LogJoinLeave then
         LogChat(Format(Settings.Formatting.LogJoinLeave, {
             time = os.date("%H:%M:%S");
             name = player.Name;
