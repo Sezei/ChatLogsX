@@ -12,7 +12,7 @@
 ```
 ]]
 
-local Version = "1.1.1A";
+local Version = "1.1.2";
 
 local Settings = {
     File = {
