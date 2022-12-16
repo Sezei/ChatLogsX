@@ -12,7 +12,7 @@
 ```
 ]]
 
-local Version = "1.1.1";
+local Version = "1.1.1A";
 
 local Settings = {
     File = {
@@ -255,6 +255,10 @@ local function ChangeSetting(settingtochange, newvalue)
     if Settings[category] then
         -- Check if the setting exists
         if type(Settings[category][setting]) ~= "nil" then
+            game:GetService("StarterGui"):SetCore("ChatMakeSystemMessage", {
+                Text = "[CLX] Setting "..settingtochange.." changed to "..tostring(newvalue).." (from "..tostring(Settings[category][setting])..")";
+                Color = Color3.fromRGB(127, 255, 0);
+            });
             -- Change the setting
             Settings[category][setting] = newvalue;
         else
