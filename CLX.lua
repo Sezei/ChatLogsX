@@ -12,7 +12,7 @@
 ```
 ]]
 
-local Version = "1.1.4";
+local Version = "1.1.4A";
 
 local Settings = {
     File = {
@@ -136,7 +136,7 @@ game:GetService("Players").PlayerAdded:Connect(function(player)
     player.Chatted:Connect(function(message)
         if message:sub(1,2) == "/e" then
             -- Ignore the emotes
-        if Settings.Logging.LogWhispers and message:sub(1, 2) == "/w" then
+        elseif Settings.Logging.LogWhispers and message:sub(1, 2) == "/w" then
             -- Get the target
             local Target = message:sub(4):split(" ")[1];
             local TargetPlayer = game:GetService("Players"):FindFirstChild(Target);
